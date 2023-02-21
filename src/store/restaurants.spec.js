@@ -70,5 +70,27 @@ describe('restaurants', () => {
         expect(store.getState().loading).toEqual(false);
       });
     });
+
+    describe('when loading fails', () => {
+      it('sets the error flag', async () => {
+        const api = {
+          loadRestaurants: () => Promise.reject('An error occured'),
+        };
+
+        const initialState = {
+          records: [],
+        };
+
+        const store = createStore(
+          restaurantsReducer,
+          initialState,
+          applyMiddleware(thunk.withExtraArgument(api)),
+        );
+
+        await store.dispatch(loadRestaurants());
+
+        expect(store.getState().error).toEqual(true);
+      });
+    });
   });
 });

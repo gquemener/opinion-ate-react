@@ -3,9 +3,10 @@ export const STORE_RESTAURANTS = 'STORE_RESTAURANTS';
 
 export const loadRestaurants = () => async (dispatch, getState, api) => {
   dispatch(startLoading());
-  const records = await api.loadRestaurants();
-
-  dispatch(storeRestaurants(records));
+  try {
+    const records = await api.loadRestaurants();
+    dispatch(storeRestaurants(records));
+  } catch (err) {}
 };
 
 const startLoading = () => ({
