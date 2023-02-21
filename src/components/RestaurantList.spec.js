@@ -49,7 +49,10 @@ describe('RestaurantList', () => {
       expect(screen.getByText('Pizza Place')).toBeInTheDocument();
     });
 
-    it.todo('hide the error message');
+    it('hides the error message', () => {
+      renderComponent();
+      expect(screen.queryByText('An error occured')).not.toBeInTheDocument();
+    });
   });
 
   describe('when loading fails', () => {
