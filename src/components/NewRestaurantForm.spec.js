@@ -5,6 +5,7 @@ import flushPromises from 'flush-promises';
 
 describe('NewRestaurantForm', () => {
   const restaurantName = 'Sushi Place';
+  const requiredError = 'Name is required';
 
   let createRestaurant;
 
@@ -12,6 +13,13 @@ describe('NewRestaurantForm', () => {
     createRestaurant = jest.fn().mockName('createRestaurant');
     render(<NewRestaurantForm createRestaurant={createRestaurant} />);
   }
+
+  describe('initially', () => {
+    it('does not show validation error', () => {
+      renderComponent();
+      expect(screen.queryByText(requiredError)).not.toBeInTheDocument();
+    });
+  });
 
   describe('when filled in', () => {
     async function fillInForm() {
@@ -48,7 +56,7 @@ describe('NewRestaurantForm', () => {
 
     it('displays a validation error', async () => {
       await submitEmptyForm();
-      expect(screen.getByText('Name is required')).toBeInTheDocument();
+      expect(screen.getByText(requiredError)).toBeInTheDocument();
     });
 
     it.todo('does not call createRestaurant');
