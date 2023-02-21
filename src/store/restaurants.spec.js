@@ -20,6 +20,10 @@ describe('restaurants', () => {
       expect(store.getState().loading).toEqual(false);
     });
 
+    it('has the error flag set to false', () => {
+      expect(store.getState().error).toEqual(false);
+    });
+
     it('has the records set to an empty array', () => {
       expect(store.getState().records).toEqual([]);
     });
