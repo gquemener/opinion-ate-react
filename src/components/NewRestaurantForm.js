@@ -9,6 +9,7 @@ export function NewRestaurantForm({createRestaurant}) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setInvalidForm(false);
     if (!name) {
       setInvalidForm(true);
     }

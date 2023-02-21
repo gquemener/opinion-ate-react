@@ -66,4 +66,26 @@ describe('NewRestaurantForm', () => {
 
     it.todo('does not call createRestaurant');
   });
+
+  describe('when correcting a validation error', () => {
+    async function fixValidationError() {
+      renderComponent();
+      createRestaurant.mockResolvedValue();
+
+      userEvent.click(screen.getByText('Add'));
+
+      await userEvent.type(
+        screen.getByPlaceholderText('Add Restaurant'),
+        restaurantName,
+      );
+      userEvent.click(screen.getByText('Add'));
+
+      return act(flushPromises);
+    }
+
+    it('clears the validation error', async () => {
+      await fixValidationError();
+      expect(screen.queryByText(requiredError)).not.toBeInTheDocument();
+    });
+  });
 });
