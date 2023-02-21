@@ -25,12 +25,14 @@ describe('RestaurantList', () => {
     expect(loadRestaurants).toHaveBeenCalled();
   });
 
-  it('displays the loading indicator while loading', () => {
-    renderComponent({loading: true});
-    expect(screen.getByRole('progressbar')).toBeInTheDocument();
-  });
+  describe('when loading', () => {
+    it('displays the loading indicator while loading', () => {
+      renderComponent({loading: true});
+      expect(screen.getByRole('progressbar')).toBeInTheDocument();
+    });
 
-  it.todo('hides the error message while loading')
+    it.todo('hides the error message while loading');
+  });
 
   describe('when loading succeeds', () => {
     it('does not display the loading indicator while not loading', () => {
@@ -44,7 +46,7 @@ describe('RestaurantList', () => {
       expect(screen.getByText('Pizza Place')).toBeInTheDocument();
     });
 
-    it.todo('hide the error message')
+    it.todo('hide the error message');
   });
 
   describe('when loading fails', () => {
