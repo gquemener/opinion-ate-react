@@ -19,6 +19,10 @@ describe('restaurants', () => {
     it('has the loading flag set to false', () => {
       expect(store.getState().loading).toEqual(false);
     });
+
+    it('has the records set to an empty array', () => {
+      expect(store.getState().records).toEqual([]);
+    });
   });
 
   describe('loadRestaurants action', () => {
