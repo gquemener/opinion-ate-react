@@ -1,6 +1,7 @@
 export const START_LOADING = 'START_LOADING';
 export const ERROR_LOADING = 'ERROR_LOADING';
 export const STORE_RESTAURANTS = 'STORE_RESTAURANTS';
+export const ADD_RESTAURANT = 'ADD_RESTAURANT';
 
 export const loadRestaurants = () => async (dispatch, getState, api) => {
   dispatch(startLoading());
@@ -13,7 +14,8 @@ export const loadRestaurants = () => async (dispatch, getState, api) => {
 };
 
 export const createRestaurant = name => async (dispatch, getState, api) => {
-  await api.createRestaurant(name);
+  const restaurant = await api.createRestaurant(name);
+  dispatch(addRestaurant(restaurant));
 };
 
 const startLoading = () => ({
@@ -27,4 +29,9 @@ const storeRestaurants = records => ({
 
 const errorLoading = () => ({
   type: ERROR_LOADING,
+});
+
+const addRestaurant = record => ({
+  type: ADD_RESTAURANT,
+  record,
 });
