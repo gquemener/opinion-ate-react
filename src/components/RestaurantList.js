@@ -17,7 +17,7 @@ export function RestaurantList({loadRestaurants, restaurants, loading, error}) {
   return (
     <>
       {loading && <CircularProgress />}
-      {!loading && error && <Alert security="error">An error occured</Alert>}
+      {!loading && error && <Alert severity="error">An error occured</Alert>}
       <List>
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>
