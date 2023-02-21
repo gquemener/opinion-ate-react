@@ -12,6 +12,7 @@ describe('RestaurantList', () => {
     const props = {
       loadRestaurants: jest.fn().mockName('loadRestaurants'),
       loading: false,
+      error: false,
       restaurants,
       ...propOverrides,
     };
@@ -29,6 +30,8 @@ describe('RestaurantList', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
+  it.todo('hides the error message while loading')
+
   describe('when loading succeeds', () => {
     it('does not display the loading indicator while not loading', () => {
       renderComponent();
@@ -39,6 +42,15 @@ describe('RestaurantList', () => {
       renderComponent();
       expect(screen.getByText('Sushi Place')).toBeInTheDocument();
       expect(screen.getByText('Pizza Place')).toBeInTheDocument();
+    });
+
+    it.todo('hide the error message')
+  });
+
+  describe('when loading fails', () => {
+    it('displays the error message', () => {
+      renderComponent({error: true});
+      expect(screen.getByText('An error occured')).toBeInTheDocument();
     });
   });
 });
