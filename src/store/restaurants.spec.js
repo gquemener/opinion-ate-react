@@ -4,19 +4,24 @@ import restaurantsReducer from './restaurants/reducers';
 import {loadRestaurants} from './restaurants/actions';
 
 describe('restaurants', () => {
-  describe('loadRestaurants action', () => {
-    describe('initially', () => {
+  describe('initially', () => {
+    let store;
+    beforeEach(() => {
       const initialState = {};
 
-      const store = createStore(
+      store = createStore(
         restaurantsReducer,
         initialState,
         applyMiddleware(thunk),
       );
-
-      expect(store.getState().loading).toEqual(false);
     });
 
+    it('has the loading flag set to false', () => {
+      expect(store.getState().loading).toEqual(false);
+    });
+  });
+
+  describe('loadRestaurants action', () => {
     describe('while loading', () => {
       it('sets a loading flag', () => {
         const api = {
