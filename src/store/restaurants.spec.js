@@ -53,6 +53,10 @@ describe('restaurants', () => {
       it('stores the restaurants', () => {
         expect(store.getState().records).toEqual(records);
       });
+
+      it('clears the loading flag', () => {
+        expect(store.getState().loading).toEqual(false);
+      });
     });
   });
 });
