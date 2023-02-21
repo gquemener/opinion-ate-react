@@ -85,7 +85,9 @@ describe('restaurants', () => {
     });
 
     describe('when loading fails', () => {
-      it('sets the error flag', async () => {
+      let store;
+
+      beforeEach(() => {
         const api = {
           loadRestaurants: () => Promise.reject('An error occured'),
         };
@@ -94,15 +96,21 @@ describe('restaurants', () => {
           records: [],
         };
 
-        const store = createStore(
+        store = createStore(
           restaurantsReducer,
           initialState,
           applyMiddleware(thunk.withExtraArgument(api)),
         );
 
-        await store.dispatch(loadRestaurants());
+        return store.dispatch(loadRestaurants());
+      });
 
+      it('sets the error flag', async () => {
         expect(store.getState().error).toEqual(true);
+      });
+
+      it('clears the loading flag', () => {
+        expect(store.getState().loading).toEqual(false);
       });
     });
   });

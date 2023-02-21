@@ -17,6 +17,7 @@ function loading(state = false, action) {
       return true;
 
     case STORE_RESTAURANTS:
+    case ERROR_LOADING:
       return false;
 
     default:
