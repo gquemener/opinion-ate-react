@@ -31,7 +31,10 @@ describe('RestaurantList', () => {
       expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
 
-    it.todo('hides the error message while loading');
+    it('hides the error message while loading', () => {
+      renderComponent({loading: true});
+      expect(screen.queryByText('An error occured')).not.toBeInTheDocument();
+    });
   });
 
   describe('when loading succeeds', () => {
