@@ -15,10 +15,11 @@ export function NewRestaurantForm({createRestaurant}) {
       setInvalidForm(true);
       return;
     }
-    setServerError(true);
     try {
       await createRestaurant(name);
-    } catch {}
+    } catch {
+      setServerError(true);
+    }
     setName('');
   };
 
