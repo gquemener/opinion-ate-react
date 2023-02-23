@@ -11,6 +11,7 @@ export function NewRestaurantForm({createRestaurant}) {
   const handleSubmit = async e => {
     e.preventDefault();
     setInvalidForm(false);
+    setServerError(false);
     if (!name) {
       setInvalidForm(true);
       return;
