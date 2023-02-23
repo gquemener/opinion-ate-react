@@ -14,12 +14,17 @@ export function NewRestaurantForm({createRestaurant}) {
       setInvalidForm(true);
       return;
     }
-    await createRestaurant(name);
+    try {
+      await createRestaurant(name);
+    } catch {}
     setName('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <Alert severity="error">
+        The restaurant could not be saved. Please try again.
+      </Alert>
       {invalidForm && <Alert severity="error">Name is required</Alert>}
       <TextField
         value={name}
