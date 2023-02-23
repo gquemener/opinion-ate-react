@@ -18,10 +18,10 @@ export function NewRestaurantForm({createRestaurant}) {
     }
     try {
       await createRestaurant(name);
+      setName('');
     } catch {
       setServerError(true);
     }
-    setName('');
   };
 
   return (

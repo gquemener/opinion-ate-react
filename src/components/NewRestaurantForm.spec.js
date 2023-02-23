@@ -120,6 +120,13 @@ describe('NewRestaurantForm', () => {
       await fillInForm();
       expect(screen.getByText(serverError)).toBeInTheDocument();
     });
+
+    it('does not clear the name field', async () => {
+      await fillInForm();
+      expect(screen.getByPlaceholderText('Add Restaurant').value).not.toEqual(
+        '',
+      );
+    });
   });
 
   describe('when retrying after a server error', () => {
