@@ -6,6 +6,7 @@ import {createRestaurant} from '../store/restaurants/actions';
 export function NewRestaurantForm({createRestaurant}) {
   const [name, setName] = useState('');
   const [invalidForm, setInvalidForm] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -14,6 +15,7 @@ export function NewRestaurantForm({createRestaurant}) {
       setInvalidForm(true);
       return;
     }
+    setServerError(true);
     try {
       await createRestaurant(name);
     } catch {}
@@ -22,9 +24,11 @@ export function NewRestaurantForm({createRestaurant}) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Alert severity="error">
-        The restaurant could not be saved. Please try again.
-      </Alert>
+      {serverError && (
+        <Alert severity="error">
+          The restaurant could not be saved. Please try again.
+        </Alert>
+      )}
       {invalidForm && <Alert severity="error">Name is required</Alert>}
       <TextField
         value={name}

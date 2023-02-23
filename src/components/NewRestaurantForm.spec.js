@@ -20,6 +20,11 @@ describe('NewRestaurantForm', () => {
       renderComponent();
       expect(screen.queryByText(requiredError)).not.toBeInTheDocument();
     });
+
+    it('does not show server error', () => {
+      renderComponent();
+      expect(screen.queryByText(serverError)).not.toBeInTheDocument();
+    });
   });
 
   describe('when filled in', () => {
