@@ -12,6 +12,7 @@ export function NewRestaurantForm({createRestaurant}) {
     setInvalidForm(false);
     if (!name) {
       setInvalidForm(true);
+      return;
     }
     await createRestaurant(name);
     setName('');
